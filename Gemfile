@@ -31,7 +31,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 
-gem 'bootstrap'
+gem 'bootstrap-sass'
 gem 'figaro'
 
 
