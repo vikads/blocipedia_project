@@ -41,13 +41,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  ActionMailer::Base_smtp_settings = {
-    address:        'smtp.gmail.com',
-    port:           '25',
-    authentication: :plain,
-    user_name:      'vika.blocipedia@gmail.com',
-    password:       'BlocAdminDupa8!',
-    domain:         'gmail.com',
-    enable_starttls_auto: true
-  }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+
 end
