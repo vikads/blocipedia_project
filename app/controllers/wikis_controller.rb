@@ -27,7 +27,7 @@ class WikisController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @wiki = Wiki.find(params[:id])
   end
 
   def update
