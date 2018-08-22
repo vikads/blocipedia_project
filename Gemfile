@@ -34,6 +34,7 @@ gem 'turbolinks'
 gem 'bootstrap-sass'
 gem 'figaro'
 gem 'devise'
+gem 'pundit'
 
 
 group :development, :test do
