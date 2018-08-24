@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
+  let(:user) { User.create!(email: "user@blocipedia.com", password: "password", password_confirmation: "password") }
+  let(:wiki) { Wiki.create!(title: "New public wiki", body: "This is the body of public wiki.", user: user) }
+
+  it { is_expected.to have_many(:wikis) }
+
   describe "attributes" do
 
     it "responds to role" do
@@ -71,6 +76,6 @@ RSpec.describe User, type: :model do
         expect(user.admin?).to be_truthy
       end
     end
-  end 
+  end
 
 end
