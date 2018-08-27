@@ -1,7 +1,5 @@
 class WikisController < ApplicationController
 
-  before_action :require_sign_n, except: [:index, :show]
-
   def index
     @wikis = Wiki.all
   end
@@ -61,7 +59,7 @@ class WikisController < ApplicationController
 
   private
 
-  def wikis_params
+  def wiki_params
     params.require(:wiki).permit(:title, :body, :private)
   end
 
