@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :wikis, dependent: :destroy
 
   before_save { self.email = email.downcase if email.present? }
-  #before_save { self.role ||= :standard }
+  before_save { self.role ||= :standard }
 
   enum role: [:standard, :premium, :admin,]
   after_initialize :set_defaults, :if => :new_record?

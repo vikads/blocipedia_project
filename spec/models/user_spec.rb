@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
-  let(:user) { User.create!(email: "user@blocipedia.com", password: "password", password_confirmation: "password") }
+  let(:user) { User.create!(email: "user@blocipedia.com", password: "password") }
   let(:wiki) { Wiki.create!(title: "New public wiki", body: "This is the body of public wiki.", user: user) }
 
   it { is_expected.to have_many(:wikis) }
@@ -21,11 +21,11 @@ RSpec.describe User, type: :model do
       expect(user). to respond_to(:admin?)
     end
 
-    it "responds to premium" do
+    it "responds to premium?" do
       expect(user).to respond_to(:premium?)
     end
 
-    it "responds to standard" do
+    it "responds to standard?" do
       expect(user).to respond_to(:standard?)
     end
   end

@@ -1,6 +1,7 @@
 class WikisController < ApplicationController
 
   def index
+    @user = User.find_by(id: session[:user_id])
     @wikis = Wiki.all
   end
 
@@ -32,7 +33,7 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.find(params[:id])
-    authorize @wiki
+    #authorize @wiki
     @wiki.assign_attributes(wiki_params)
 
 
@@ -47,7 +48,7 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:id])
-    authorize @wiki 
+    #authorize @wiki
 
     if @wiki.destroy
       flash[:notice] = "\"#{@wiki.title}\" was deleted."
