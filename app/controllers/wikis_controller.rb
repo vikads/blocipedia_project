@@ -1,4 +1,5 @@
 class WikisController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
     @user = User.find_by(id: session[:user_id])
@@ -33,7 +34,7 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.find(params[:id])
-    #authorize @wiki
+    authorize @wiki
     @wiki.assign_attributes(wiki_params)
 
 
@@ -48,11 +49,11 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:id])
-    #authorize @wiki
+    authorize @wiki
 
     if @wiki.destroy
       flash[:notice] = "\"#{@wiki.title}\" was deleted."
-      redirect_to wikis_path
+      redirect_to  @wiki #wikis_path
     else
       flash.now[:alert] = "There was an error deleting your wiki."
       render :show
