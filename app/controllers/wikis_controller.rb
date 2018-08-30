@@ -3,20 +3,23 @@ class WikisController < ApplicationController
 
   def index
     @user = User.find_by(id: session[:user_id])
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def new
     @wiki = Wiki.new
+    authorize @wiki
   end
 
   def create
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
+    authorize @wiki
 
     if @wiki.save
 
@@ -30,6 +33,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def update
@@ -53,7 +57,7 @@ class WikisController < ApplicationController
 
     if @wiki.destroy
       flash[:notice] = "\"#{@wiki.title}\" was deleted."
-      redirect_to  wikis_path #@wiki #wikis_path
+      redirect_to wikis_path
     else
       flash.now[:alert] = "There was an error deleting your wiki."
       render :show
