@@ -3,7 +3,8 @@ class WikisController < ApplicationController
 
   def index
     @user = User.find_by(id: session[:user_id])
-    @wikis = policy_scope(Wiki)
+    # @wikis = policy_scope(Wiki)
+    @wikis = Wiki.all
   end
 
   def show
