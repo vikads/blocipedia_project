@@ -37,13 +37,16 @@ class WikiPolicy < ApplicationPolicy
     end
 
     def resolve
-      if user.admin?
-        return scope.all
-      else
-        wikis = []
-        scope.all.each do |wiki|
+      wikis =[]
+        if user.admin?
+            wikis = scope.all
+            return wikis
+        else
+          all_wikis = scope.all
+          wikis = []
+          all_wikis.each do |wiki|
           if !wiki.private || user.admin? || user == wiki.user
-            wikis.push(wiki)
+            wikis.push(wiki) #wikis<<wiki
           end
         end
         wikis
