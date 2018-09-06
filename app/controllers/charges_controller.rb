@@ -11,7 +11,7 @@ class ChargesController < ApplicationController
   # Where the real magic happens
   charge = Stripe::Charge.create(
     customer: customer.id, #Note -- this is NOT the uer_id in the app
-    amoutn: 15_00,
+    amount: 15_00,
     description: "Premium Membership - #{current_user.email}",
     currency: 'usd'
   )
@@ -19,7 +19,7 @@ class ChargesController < ApplicationController
 
   flash[:notice] = "Thanks for all the money, #{current_user.email}! Now you are a PREMIUM member!."
   current_user.update_attribute(:role, 'premium')
-  redirect_to rooth_path # or wherever
+  redirect_to root_path # or wherever
 
 
 
@@ -29,12 +29,14 @@ class ChargesController < ApplicationController
   rescue Stripe::CardError => e
     flash[:alert] = e.message
     redirect_to new_charge_path
-end
+  end
 
-def new
-  @stripe_btn_data = {
-    key: "#{Rails.configurations.stripe[:publishable_key] }",
-    description: "Premium Membership - #{current_user.name}",
-    amount: 15_00
-  }
-end 
+  def new
+    @stripe_btn_data = {
+      key: "#{ Rails.configuration.stripe[:publishable_key] }",
+      description: "Premium Membership - #{current_user.email}",
+      amount: 15_00
+    }
+  end
+
+end
