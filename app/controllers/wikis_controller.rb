@@ -3,8 +3,8 @@ class WikisController < ApplicationController
 
   def index
     @user = User.find_by(id: session[:user_id])
-    # @wikis = policy_scope(Wiki)
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
+    #@wikis = Wiki.all
   end
 
   def show
@@ -23,7 +23,6 @@ class WikisController < ApplicationController
     authorize @wiki
 
     if @wiki.save
-
       flash[:notice] = "Wiki was saved."
       redirect_to @wiki
     else

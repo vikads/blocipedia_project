@@ -8,18 +8,18 @@
   <div class="jumbotron">
     <h2>Create and share Markdown Wikis!</h2>
     <p>
-     <%= link_to "Sign In", new_user_session_path %> or 
-     <%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link' 'btn btn-primary' %> now!
+     <%= link_to "Sign In", new_user_session_path, :class =>  'btn btn-primary' %> or
+     <%= link_to "Sign Up", new_user_registration_path, :class =>  'btn btn-primary' %> now!
     </p>
   </div>
 
   <div class="row">
     <div class="col-md-4">
       <h3>Create as many public wikis as you want!</h3>
-      <p>Free Plan</p>
+      <%= link_to "Free Plan", new_user_registration_path, :class =>  'btn btn-primary' %>
     </div>
 
     <div class="col-md-4">
       <h3>Create private wikis!</h3>
-      <p>Premium Plan</p>
+      <%= link_to "Premium Plan", new_charge_path, :class => 'btn btn-success' %>
   </div>
