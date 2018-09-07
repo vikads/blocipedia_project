@@ -46,9 +46,6 @@ class WikiPolicy < ApplicationPolicy
       #   scope.all
       if user.nil?
         wikis = scope.where(private: false)
-      elsif user.premium?
-        user.wikis == private.wikis
-
 
       else
         all_wikis = scope.all
