@@ -1,0 +1,21 @@
+<br>
+<p> Your current memebership level is: <strong><%=current_user.role%></strong></p>
+
+<% if current_user.standard? %>
+  <%= form_tag charges_path do %>
+     <h4>Do you want to be a <strong>PREMIUM</strong> member?<h4>
+     <p><strong>private wikis are here!!!<strong></p>
+     <h4>Click the button!</h4>
+     <script class='stripe-button' src="https://checkout.stripe.com/checkout.js"
+     data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>"
+     data-description="<%= @stripe_btn_data[:description] %>" ></script>
+   <% end %>
+
+   <% elsif current_user.role == "premium" %>
+
+      <h4> If you do not need private wikis anymore. No worries. </h4>
+      <%= link_to "Downgrade Account", downgrade_path,
+      class: 'btn btn-danger',
+      data: {confirm: "Are you 100% sure you want to downgarde your account? Your wikis will be public now. You will need to pay again for premium membership to change it."} %>
+
+  <% end %>
