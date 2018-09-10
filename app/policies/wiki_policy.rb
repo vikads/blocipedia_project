@@ -4,7 +4,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def index?
-    true #(all users can see the index)
+    false
   end
 
   def show?
@@ -20,11 +20,11 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def update?
-    edit?
+    user.present? && is_authorized?(user,record)
   end
 
   def edit?
-    user.present? && is_authorized?(user,record)
+    update?
   end
 
   def scope
@@ -40,13 +40,18 @@ class WikiPolicy < ApplicationPolicy
     end
 
     def resolve
-      #scope.where(private: false) if user.nil?
       wikis = []
       # if user.admin?
       #   scope.all
       if user.nil?
         wikis = scope.where(private: false)
-
+      elsif user.premium?
+        all_wikis = scope.all
+        all_wikis.each do |wiki|
+          if !wiki.private || user = wiki.user || user.admin?
+            wikis << wiki
+          end
+        end
       else
         all_wikis = scope.all
         wikis = []
@@ -55,10 +60,11 @@ class WikiPolicy < ApplicationPolicy
             wikis<<wiki
           end
         end
-        wikis
+      end
+      wikis
       end
     end
-  end
+  # end
 
   def is_authorized?(user, record)
     !record.private || user.admin? || user == record.user
