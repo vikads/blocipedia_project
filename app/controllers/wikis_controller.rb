@@ -43,7 +43,7 @@ class WikisController < ApplicationController
 
 
     if @wiki.save
-      flash[:notice] =  "You have updated your wiki."
+      flash[:notice] =  "You have updated that wiki."
       redirect_to @wiki
     else
       flash.now[:alert] = "There was an error saving the wiki. Please try again."
