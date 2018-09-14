@@ -15,13 +15,13 @@
 <% if @wiki.private? && policy(@wiki).destroy? %>
 
    <%=  form_for [wiki, Collaborator.new] do |f| %>
-      <p>You can add Collaborators here, using their Emails.</p>
-
-      <%= f.text_field :user, class: 'form-control', placeholder: 'Email here.' %>
+      <div class="form-group">
+        <%= f.text_field :user, class: 'form-control', placeholder: 'Add Collaborators here, using their Emails.' %>
+      </div>
 
       <div class="form-group">
         <%= f.submit "Save", class: 'btn btn-success' %>
       </div>
    <% end %>
 
-  <% end %>
+<% end %>

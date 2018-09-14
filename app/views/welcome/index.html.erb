@@ -1,25 +1,32 @@
 <br>
 
-  <h1>Welcome to Blocipedia!</h1>
-  <h2>Social, Markdown Wikis</h2>
+<div class="container">
 
-
-
-  <div class="jumbotron">
-    <h2>Create and share Markdown Wikis!</h2>
-    <p>
-     <%= link_to "Sign In", new_user_session_path, :class =>  'btn btn-primary' %> or
-     <%= link_to "Sign Up", new_user_registration_path, :class =>  'btn btn-primary' %> now!
-    </p>
+  <div class= "row-main-heading">
+      <h1>Welcome to Blocipedia!</h1>
+      <h2>Social, Markdown Wikis</h2>
   </div>
 
-  <div class="row">
-    <div class="col-md-4">
+    <div class="jumbotron">
+      <h2>Create and share Markdown Wikis!</h2>
+      <p>
+       <%= link_to "Sign In", new_user_session_path, :class =>  'btn btn-primary' %> or
+       <%= link_to "Sign Up", new_user_registration_path, :class =>  'btn btn-primary' %> now!
+      </p>
+    </div>
+
+
+  <div class="row-main-content">
+    <div class="col-md-6 body">
       <h3>Create as many public wikis as you want!</h3>
       <%= link_to "Free Plan", new_user_registration_path, :class =>  'btn btn-primary' %>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6 body">
       <h3>Create private wikis!</h3>
       <%= link_to "Premium Plan", new_charge_path, :class => 'btn btn-success' %>
+    </div>
   </div>
+
+
+</div>

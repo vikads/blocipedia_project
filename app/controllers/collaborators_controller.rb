@@ -5,17 +5,25 @@ class CollaboratorsController < ApplicationController
     @user = User.find_by_email(params[:collaborator][:user])
 
     if User.exists?(@user)
-      @collaborator = @wiki.collaborators.new(wiki_id: @wiki.id, user_id: @user.id)
-
-      if @collaborator.save
-        flash[:notice] = "Collaborator \"#{@collaborator.user.email}\ added to the list of collaborators."
+      if @user == current_user
+        flash[:alert] = "You can not be the collaborator, you are the wiki owner."
+        redirect_to @wiki
+      elsif @wiki.users.include?(@user)
+        flash[:alert] =  "User is alredy a collaborator"
+        redirect_to @wiki
       else
-        flash.now[:alert] = "Error occured. Please try again."
+        @collaborator = @wiki.collaborators.new(wiki_id: @wiki.id, user_id: @user.id)
+
+        if @collaborator.save
+          flash[:notice] = "Collaborator \"#{@collaborator.user.email}\ added to the list of collaborators."
+        else
+          flash[:alert] = "Error occured. Please try again."
+        end
+        redirect_to @wiki
       end
-      redirect_to @wiki
 
     else
-      flash.now[:alert] = "User does not exist"
+      flash[:alert] = "User does not exist"
       redirect_to @wiki
     end
   end
@@ -29,7 +37,7 @@ class CollaboratorsController < ApplicationController
       flash[:notice] = "Collaborator \"#{@collaborator.user.email}\ deleted from the list of collaborators."
       redirect_to @wiki
     else
-      flash.now[:alert] = "Error occured"
+      flash[:alert] = "Error occured"
       redirect_to @wiki
     end
   end
