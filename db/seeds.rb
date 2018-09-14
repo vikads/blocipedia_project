@@ -24,7 +24,7 @@ users = User.all
     user: users.sample,
     title: Faker::Community.characters,
     body: Faker::Community.quotes,
-    # confirmed_at: Time.now
+    private: false
   )
 end
 wikis = Wiki.all
