@@ -46,6 +46,14 @@ class ChargesController < ApplicationController
     current_user.update_attribute(:role, 'standard')
     flash[:notice] = "You've changed your mind, #{current_user.email}! Your account have beed downgraded to STANDARD!."
 
+    wikis = current_user.wikis
+    wikis.each do |wiki|
+      if wiki.private
+        wiki.private = false
+        wiki.save!
+      end
+    end 
+
 
     redirect_to new_charge_path
   end
