@@ -9,6 +9,8 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
+    @user = User.find_by(id: session[:user_id])
+    @collaborators = @wiki.collaborators
     authorize @wiki
   end
 

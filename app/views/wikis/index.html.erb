@@ -1,19 +1,29 @@
-<h1>Wikis</h1>
+<div class="conatiner">
 
-<div class="col-md-12">
-  <%= link_to "New wiki", new_wiki_path, class: 'btn btn-success' %>
-</div>
-
-<div class= "row">
-  <div class='col-md-12'>
-    <% @wikis.each do |wiki| %>
-      <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading">
-            <%= link_to markdown(wiki.title), wiki_path(wiki.id) %>
-          </h4>
-        </div>
-      </div>
-    <% end %>
+  <div class="row heading">
+    <div class="col-md-12">
+      <h1>Wikis</h1>
+    </div>
   </div>
+
+  <div class="row new-wiki">
+    <div class="col-md-12">
+      <%= link_to "New wiki", new_wiki_path, class: 'btn btn-success' %>
+    </div>
+  </div>
+
+  <div class= "row content">
+    <div class='col-md-12'>
+      <% @wikis.each do |wiki| %>
+        <div class="media">
+          <div class="media-body">
+            <h4 class="media-heading">
+              <%= link_to markdown(wiki.title), wiki_path(wiki.id) %>
+            </h4>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
 </div>

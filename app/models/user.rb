@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_many :wikis, dependent: :destroy
+  has_many :collaborators, dependent: :destroy
 
   before_save { self.email = email.downcase if email.present? }
   before_save { self.role ||= :standard }
